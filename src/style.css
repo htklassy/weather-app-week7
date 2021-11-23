@@ -1,3 +1,6 @@
+/*body {
+  background-color: rgb(243, 243, 243);
+}*/
 h1 {
   color: black;
   display: block;
@@ -34,8 +37,11 @@ a {
 }
 .weather-app {
   padding: 20px;
-  border: 1px solid #dadde1;
+  /*background: white;*/
   border-radius: 5px;
+  border: 1px solid #dad5d5;
+  /*box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5),
+    0 15px 40px rgba(166, 173, 201, 0.2);*/
 }
 .overview {
   margin-bottom: 20px;
@@ -67,16 +73,18 @@ a {
   font-weight: bolder;
 }
 .input-search-button {
-  background-color: rgb(73, 63, 219);
-  color: white;
-  border: none;
+  background-color: white;
+  color: #ec6e4c;
+  border: 2px solid #ec6e4c;
   border-radius: 5px;
   padding: 4px 20px;
   font-weight: 300;
 }
 .input-search-button:hover {
-  transition: all 200ms ease;
-  opacity: 0.8;
+  transition: all 200ms ease-in-out;
+  background-color: #ec6e4c;
+  color: white;
+  font-weight: 600;
 }
 .input-search-box {
   font-family: Poppins, sans-serif;

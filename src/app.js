@@ -11,7 +11,7 @@ let minutes = date.getMinutes();
     }
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let day = days[date.getDay()];
-    if (hours <= 12){
+    if (hours < 12){
         return `${day} ${hours}:${minutes} AM`;
     } else {
         return `${day} ${hours}:${minutes} PM`;
