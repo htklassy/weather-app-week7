@@ -23,7 +23,9 @@ function displayTemperature(response) {
     let dateElement = document.querySelector("#date");
     let iconElement = document.querySelector("#icon");
 
-    tempeartureElement.innerHTML = Math.round(response.data.main.temp*(9/5)+32);
+    fahrenheitTemperature = response.data.main.temp;
+
+    tempeartureElement.innerHTML = Math.round(response.data.main.temp);
     cityElement.innerHTML = response.data.name;
     descriptionElement.innerHTML = response.data.weather[0].description;
     humidityElement.innerHTML = response.data.main.humidity;
@@ -38,7 +40,7 @@ function displayTemperature(response) {
 }
 function search(city) {
 let apiKey = "ce7559a40e1096d539e469e7e924e165";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
 axios.get(apiUrl).then(displayTemperature);
 }
 
@@ -48,10 +50,32 @@ function handleSubmit(event) {
     search(cityInputElement.value);
 }
 
+function displayCelciusTemp(event) {
+    event.preventDefault();
+    let celciusTemp = (fahrenheitTemperature - 32) * 5/9;
+    fahrenheitLink.classList.remove("active");
+    celciusLink.classList.add("active");
+    let temperatureElement = document.querySelector("#temperature");
+    temperatureElement.innerHTML = Math.round(celciusTemp);
+}
 
-search("Denver");
+function displayFahrenheitTemp(event) {
+    event.preventDefault();
+    fahrenheitLink.classList.add("active");
+    celciusLink.classList.remove("active");
+    let temperatureElement = document.querySelector("#temperature");
+    temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
 
-
+let fahrenheitTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let celciusLink = document.querySelector("#celcius-link");
+celciusLink.addEventListener("click", displayCelciusTemp);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
+
+search("Denver");
