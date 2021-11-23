@@ -11,7 +11,12 @@ let minutes = date.getMinutes();
     }
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let day = days[date.getDay()];
-    return `${day} ${hours}:${minutes}`;
+    if (hours <= 12){
+        return `${day} ${hours}:${minutes} AM`;
+    } else {
+        return `${day} ${hours}:${minutes} PM`;
+    }
+    
 }
 
 function displayTemperature(response) {
