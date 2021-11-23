@@ -31,16 +31,27 @@ function displayTemperature(response) {
     dateElement.innerHTML = formatDate(response.data.dt*1000);
     iconElement.setAttribute(
     "src",
-    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}2x.png`);
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     iconElement.setAttribute(
         "alt", 
         response.data.weather[0].description);
 }
-
-
+function search(city) {
 let apiKey = "ce7559a40e1096d539e469e7e924e165";
-let city = "Portland";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-console.log(apiUrl);
 axios.get(apiUrl).then(displayTemperature);
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    let cityInputElement = document.querySelector("#city-input");
+    search(cityInputElement.value);
+}
+
+
+search("Denver");
+
+
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
