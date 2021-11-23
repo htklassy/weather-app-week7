@@ -1,5 +1,5 @@
 h1 {
-  color: #878787;
+  color: black;
   display: block;
   font-family: monospace;
   font-size: 24px;
@@ -26,6 +26,7 @@ li:first-letter {
 }
 a {
   text-decoration: none;
+  color: #ec6e4c;
 }
 .weather-app-wrapper {
   max-width: 600px;
@@ -64,4 +65,20 @@ a {
   color: black;
   cursor: default;
   font-weight: bolder;
+}
+.input-search-button {
+  background-color: rgb(73, 63, 219);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 20px;
+  font-weight: 300;
+}
+.input-search-button:hover {
+  transition: all 200ms ease;
+  opacity: 0.8;
+}
+.input-search-box {
+  font-family: Poppins, sans-serif;
+  font-size: 12px;
 }
