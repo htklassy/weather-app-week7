@@ -20,6 +20,7 @@ li {
   font-family: sans-serif;
   font-size: 16px;
   line-height: 19px;
+  text-transform: capitalize;
 }
 .weather-app-wrapper {
   max-width: 600px;
@@ -50,4 +51,7 @@ li {
   position: relative;
   font-size: 16px;
   top: -34px;
+}
+.wind {
+  text-transform: lowercase;
 }
