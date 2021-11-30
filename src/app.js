@@ -18,42 +18,55 @@ let day = days[date.getDay()];
     }
 }
 
+function formatDay(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let day = date.getDay();
 
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    return days[day];
+
+} 
 
 
 function displayForecast(response) {
-    console.log(response.data.daily);
+   let forecast = response.data.daily;
+
     let forecastElement = document.querySelector("#weather-forecast");
 
-    let days = ["Tue","Wed", "Thu", "Fri", "Sat", "Sun"];
+    
 
     let forecastHTML = `<div class="row">`;
     
-    days.forEach(function(day){
+    forecast.forEach(function(forecastDay, index){
+        if (index < 6 ){
+
     forecastHTML = 
         forecastHTML + 
         `
        <div class="col-2">
                     <div class="weather-forecast-date">
-                        ${day}
+                        ${formatDay(forecastDay.dt)}
                     </div>
-                    <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="sunny" width="42px" />
+                    <img src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="sunny" width="42px" />
                     <div class="weather-forecast-high-low">
-                        <span class="forecast-high">18°</span> <span class="forecast-low">16°</span>
+                        <span class="forecast-high">${Math.round(forecastDay.temp.max)}°</span> <span class="forecast-low">${Math.round(forecastDay.temp.min)}°</span>
                     </div>
                 </div>
     `;
+        }
     });
     
     forecastHTML = forecastHTML + `</div>`;
     forecastElement.innerHTML = forecastHTML;
     console.log(forecastHTML);
+    
 }
 
 function getForecast(coordinates) {
     console.log(coordinates);
     let apiKey = "ce7559a40e1096d539e469e7e924e165";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&unit=imperial`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(displayForecast);
 }
 
