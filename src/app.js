@@ -16,8 +16,40 @@ let day = days[date.getDay()];
     } else {
         return `${day} ${hours}:${minutes} PM`;
     }
-    
 }
+
+
+
+
+function displayForecast() {
+    let forecastElement = document.querySelector("#weather-forecast");
+
+    let days = ["Tue","Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    let forecastHTML = `<div class="row">`;
+    
+    days.forEach(function(day){
+    forecastHTML = 
+        forecastHTML + 
+        `
+       <div class="col-2">
+                    <div class="weather-forecast-date">
+                        ${day}
+                    </div>
+                    <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="sunny" width="42px" />
+                    <div class="weather-forecast-high-low">
+                        <span class="forecast-high">18°</span> <span class="forecast-low">16°</span>
+                    </div>
+                </div>
+    `;
+    });
+    
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
+    console.log(forecastHTML);
+}
+
+
 
 function displayTemperature(response) {
     let tempeartureElement = document.querySelector("#temperature");
@@ -27,6 +59,7 @@ function displayTemperature(response) {
     let windElement = document.querySelector("#wind");
     let dateElement = document.querySelector("#date");
     let iconElement = document.querySelector("#icon");
+
 
     fahrenheitTemperature = response.data.main.temp;
 
@@ -43,17 +76,28 @@ function displayTemperature(response) {
         "alt", 
         response.data.weather[0].description);
 }
+
+
+
+
 function search(city) {
 let apiKey = "ce7559a40e1096d539e469e7e924e165";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
 axios.get(apiUrl).then(displayTemperature);
 }
 
+
+
+
+
 function handleSubmit(event) {
     event.preventDefault();
     let cityInputElement = document.querySelector("#city-input");
     search(cityInputElement.value);
 }
+
+
+
 
 function displayCelciusTemp(event) {
     event.preventDefault();
@@ -64,6 +108,9 @@ function displayCelciusTemp(event) {
     temperatureElement.innerHTML = Math.round(celciusTemp);
 }
 
+
+
+
 function displayFahrenheitTemp(event) {
     event.preventDefault();
     fahrenheitLink.classList.add("active");
@@ -71,6 +118,10 @@ function displayFahrenheitTemp(event) {
     let temperatureElement = document.querySelector("#temperature");
     temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
+
+
+displayForecast();
+
 
 let fahrenheitTemperature = null;
 
